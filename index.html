@@ -22,8 +22,12 @@ function start(){
 <style>
 body{
 background-image: url('andyvid.gif');
-background-repeat: none;
-background-size: cover;
+background-size: contain;       /* Scales image to fit completely within screen */
+background-repeat: no-repeat;    /* Prevents the image from tiling */
+background-position: center;     /* Centers the GIF */
+background-attachment: fixed;    /* Keeps it in place while scrolling */
+height: 100vh;                   /* Ensures the body takes full height */
+margin: 0;                       /* Removes default margins */
 }
 </style>
 <audio id="jump" loop>
