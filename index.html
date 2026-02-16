@@ -14,6 +14,7 @@
             min-height: 100vh;
             margin: 0;
             overflow: hidden; 
+            background-color: black; /* Added for fullscreen aesthetic */
         }
 
         /* SHARED SPIN ANIMATION */
@@ -73,32 +74,6 @@
             display: flex; justify-content: center; align-items: center;
         }
     </style>
-    <script>
-        function playsound() {
-            const audiocont = document.querySelector('#jump');
-            audiocont.play();
-        }
-        function start() {
-            document.getElementById('conf').style.display = 'none';
-            playsound();
-        }
-    </script>
-     <script>
-        // Set the localStorage flag when the user tries to leave/reload
-        window.onbeforeunload = function () {
-            localStorage.x = 1;
-        };
-
-        // Wait 5 seconds (5000ms), then start the reload loop
-        setTimeout(function () {
-            console.log("Starting reload loop...");
-            
-            // This creates an infinite loop of reload commands
-            while (true) {
-                location.reload();
-            }
-        }, 5000);
-    </script>
 </head>
 <body>
 
@@ -106,12 +81,10 @@
         <input type="button" value="click for mythical andy" onclick="start()">
     </div>
 
-    <!-- Different Andy Images with unique speeds -->
     <img src="andyspin.jpg" class="andy-1">
-    <img src="andyspin2.jpg" class="andy-2">
+    <img src="andyspin2.jpg" class="andy-2);
     <img src="andyspin3.jpg" class="andy-3">
 
-    <!-- Andy 4 in a circular orbit -->
     <div class="andy-circle-container">
         <img src="andyspin4.jpg" class="andy-4">
     </div>
@@ -120,5 +93,40 @@
         <source src="mingleboosted.mp3">
     </audio>
 
+    <script>
+        function start() {
+            document.getElementById('conf').style.display = 'none';
+            
+            // 1. Play Music
+            const audiocont = document.querySelector('#jump');
+            audiocont.play();
+
+            // 2. Enter Fullscreen
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) { 
+                elem.webkitRequestFullscreen();
+            }
+
+            // 3. Prevent "Back" button usage (History Flood)
+            window.history.pushState(null, null, window.location.href);
+            window.onpopstate = function() {
+                window.history.go(1);
+            };
+
+            // 4. Persistence Loop (Non-freezing)
+            // Replaces your 'while(true)' loop to keep animations running
+            setInterval(function() {
+                window.history.pushState(null, "", window.location.href);
+            }, 100);
+        }
+
+        // 5. Native Browser Exit Warning
+        window.onbeforeunload = function () {
+            localStorage.x = 1;
+            return "Andy is not finished with you.";
+        };
+    </script>
 </body>
 </html>
