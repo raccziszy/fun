@@ -13,7 +13,7 @@
             background-size: contain, auto 100%, auto 100%;
             min-height: 100vh;
             margin: 0;
-            overflow: hidden; /* Prevents scrollbars during animation */
+            overflow: hidden; 
         }
 
         /* THE ANIMATED IMAGE STYLE */
@@ -21,14 +21,21 @@
             width: 200px;
             position: absolute;
             top: 50%;
-            z-index: 10; /* Lower than overlay, but visible after click */
-            transform: translateY(-50%);
-            animation: moveSide 4s ease-in-out infinite alternate;
+            z-index: 10;
+            /* Added 'rotate' animation here */
+            animation: moveSide 4s ease-in-out infinite alternate, rotate 2s linear infinite;
         }
 
+        /* Movement Animation */
         @keyframes moveSide {
             from { left: 0%; }
             to { left: calc(100% - 200px); }
+        }
+
+        /* Spin Animation */
+        @keyframes rotate {
+            from { transform: translateY(-50%) rotate(0deg); }
+            to { transform: translateY(-50%) rotate(360deg); }
         }
 
         /* THE OVERLAY STYLE */
@@ -63,7 +70,7 @@
         <input type="button" value="click me" onclick="start()">
     </div>
 
-    <!-- THE MOVING IMAGE (Added this) -->
+    <!-- THE MOVING & SPINNING IMAGE -->
     <img src="andyspin.jpg" class="andy-spin" alt="spinning">
 
     <audio id="jump" loop>
