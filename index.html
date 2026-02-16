@@ -47,6 +47,27 @@ body{
   min-height: 100vh;
   margin: 0;
 }
+        /* 3. Spinning Animation Logic */
+        @keyframes spin-logic {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* 4. Spinner Styling */
+        .spinner {
+            position: fixed;
+            bottom: 20px;
+            width: 80px;  /* Small size */
+            height: 80px; /* Small size */
+            background-image: url('andyspin.jpg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 100;
+            animation: spin-logic 3s linear infinite;
+        }
+
+        .left-spin { left: 20px; }
+        .right-spin { right: 20px; }
 </style>
 <audio id="jump" loop>
 	<source src='mingleboosted.mp3'>
